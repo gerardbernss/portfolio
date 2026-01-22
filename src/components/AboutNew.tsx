@@ -173,8 +173,8 @@ export default function AboutNew() {
                   designs that are not only visually appealing but also
                   user-centered and accessible. To further expand my skill set,
                   I watch tutorials on platforms like YouTube and enroll in
-                  online courses on Coursera. I am currently pursuing a Masters
-                  in Information Technology at Saint Louis University,
+                  online courses on Coursera. I am currently pursuing a Master’s
+                  degree in Information Technology at Saint Louis University,
                   Philippines.
                 </p>
                 <p>
@@ -184,7 +184,7 @@ export default function AboutNew() {
                   technologies and best practices.
                 </p>
                 <p>
-                  When I'm not coding, you can find me exploring new
+                  When I'm not coding, you can find me exploring new trends and
                   technologies that push the boundaries of what's possible on
                   the web.
                 </p>

@@ -22,8 +22,8 @@ export default function SkillsNew() {
       skills: ["PostgreSQL", "MongoDB", "Oracle SQL", "MySQL"],
     },
     {
-      title: "DevOps & Tools",
-      skills: ["Docker", "AWS", "Git", "Linux", "Vercel"],
+      title: "Tools",
+      skills: ["Docker", "Figma", "Git", "Linux", "Vercel"],
     },
   ];
 

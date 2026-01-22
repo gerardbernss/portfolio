@@ -382,11 +382,11 @@ export default function HeroNew() {
         >
           Building{" "}
           <span className="text-blue-700 dark:text-blue-400 drop-shadow-[0_0_10px_rgba(59,130,246,0.4)] dark:drop-shadow-[0_0_15px_rgba(96,165,250,0.5)]">
-            secure
+            clean
           </span>{" "}
           &{" "}
           <span className="text-blue-700 dark:text-blue-400 drop-shadow-[0_0_10px_rgba(59,130,246,0.4)] dark:drop-shadow-[0_0_15px_rgba(96,165,250,0.5)]">
-            scalable
+            user-centered
           </span>{" "}
           web applications
         </motion.h2>
@@ -397,9 +397,8 @@ export default function HeroNew() {
           transition={{ delay: 0.5 }}
           className="text-base xl:text-lg text-gray-600 dark:text-gray-400"
         >
-          Passionate about creating elegant solutions to complex problems.
-          Specializing in full-stack development with a focus on performance and
-          user experience.
+          Creating applications that are efficient and user-friendly. Driven to
+          turn challenging problems into simple, well-designed solutions.
         </motion.p>
 
         <motion.div

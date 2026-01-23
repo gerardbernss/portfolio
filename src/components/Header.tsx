@@ -1,3 +1,21 @@
+/**
+ * Header Component
+ *
+ * A floating pill-style navigation header with glass morphism effect.
+ * Features responsive design with mobile menu and theme toggle.
+ *
+ * Key Features:
+ * - Floating pill navbar centered at top of viewport
+ * - Glass morphism with backdrop blur (increases on scroll)
+ * - Theme toggle button positioned outside the pill
+ * - Mobile hamburger menu with animated overlay
+ * - Logo with hover glow effect
+ * - Smooth animations using Framer Motion
+ *
+ * Responsive Behavior:
+ * - Desktop (md+): Shows all nav links inline
+ * - Mobile (<md): Shows hamburger menu with slide-down overlay
+ */
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -7,15 +25,24 @@ import { Moon, Sun, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function Header() {
+  // Theme context for dark/light mode toggle
   const { theme, toggleTheme } = useTheme();
+
+  // Track scroll position to enhance glass effect when scrolled
   const [scrolled, setScrolled] = useState(false);
+
+  // Prevent hydration mismatch by waiting for client-side mount
   const [mounted, setMounted] = useState(false);
+
+  // Control mobile menu open/close state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Set mounted to true after initial render to avoid SSR/client mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Track scroll position to enhance navbar styling when scrolled past threshold
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -24,7 +51,7 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on resize to desktop
+  // Auto-close mobile menu when window resizes to desktop breakpoint
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -35,7 +62,7 @@ export default function Header() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Prevent body scroll when mobile menu is open
+  // Lock body scroll when mobile menu is open to prevent background scrolling
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -47,6 +74,7 @@ export default function Header() {
     };
   }, [mobileMenuOpen]);
 
+  // Navigation items with anchor links to page sections
   const navItems = [
     { name: "About", href: "#about" },
     { name: "Experience", href: "#experience" },
@@ -55,13 +83,19 @@ export default function Header() {
     { name: "Contact", href: "#contact" },
   ];
 
+  // Close mobile menu when a nav link is clicked
   const handleNavClick = () => {
     setMobileMenuOpen(false);
   };
 
   return (
     <>
-      {/* Floating Pill Navbar */}
+      {/*
+        Floating Pill Navbar Container
+        - Fixed positioning at top center of viewport
+        - Uses flex to arrange pill nav and theme toggle side by side
+        - Spring animation for entrance effect
+      */}
       <motion.header
         className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 sm:gap-3"
         initial={{ y: -100, opacity: 0 }}

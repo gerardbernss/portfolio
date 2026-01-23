@@ -1,3 +1,25 @@
+/**
+ * Experience Component
+ *
+ * Displays work experience in a vertical timeline layout.
+ * Features animated entrance and interactive technology tags.
+ *
+ * Key Features:
+ * - Vertical timeline with glowing dot indicators
+ * - Job title, company, date range, and description
+ * - Technology tags with hover glow effects
+ * - Staggered slide-in animations from left
+ * - Purple ambient glow background effect
+ *
+ * Timeline Design:
+ * - Left border line connects experience entries
+ * - Glowing blue dot marks each position
+ * - Technologies displayed as hoverable tags
+ *
+ * Responsive Behavior:
+ * - Consistent layout across all screen sizes
+ * - Adaptive text sizes and spacing
+ */
 "use client";
 
 import { motion } from "framer-motion";
@@ -6,9 +28,13 @@ import { useRef } from "react";
 import { Briefcase, Calendar } from "lucide-react";
 
 export default function Experience() {
+  // Ref for scroll-triggered animations
   const ref = useRef(null);
+
+  // Trigger animation when section enters viewport
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Work experience data - ordered from most recent to oldest
   const experiences = [
     {
       title: "Junior Web Developer",
@@ -39,7 +65,7 @@ export default function Experience() {
     <section
       id="experience"
       ref={ref}
-      className="py-16 sm:py-20 md:py-24 bg-[#F8F9FA] dark:bg-[#121114] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-[#F8F9FA]/90 dark:bg-[#121114]/90 relative overflow-hidden"
     >
       {/* Ambient Glow */}
       <div className="absolute top-1/3 right-0 w-48 sm:w-64 md:w-80 h-48 sm:h-64 md:h-80 bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-[60px] sm:blur-[80px] md:blur-[100px] pointer-events-none" />

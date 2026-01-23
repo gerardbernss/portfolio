@@ -1,19 +1,43 @@
+/**
+ * ContactNew Component
+ *
+ * The contact section with multiple contact methods and a CTA button.
+ * Features contact cards for email, phone, and location.
+ *
+ * Key Features:
+ * - Three contact method cards: Email, Phone, Location
+ * - Clickable email and phone cards (links to mailto: and tel:)
+ * - Hover effects with border highlight and shadow glow
+ * - Primary "Send me a message" CTA button
+ * - Staggered entrance animations for cards
+ * - Dual ambient glow effects
+ *
+ * Responsive Behavior:
+ * - Mobile (<480px): Single column, full-width cards
+ * - Tablet (480px+): Two columns, location spans both
+ * - Desktop (lg+): Three equal columns
+ * - Full-width CTA button on mobile, auto-width on larger screens
+ */
 "use client";
 
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { SiGithub, SiLinkedin, SiMessenger } from "react-icons/si";
 
 export default function ContactNew() {
+  // Ref for scroll-triggered animations
   const ref = useRef(null);
+
+  // Trigger animation when section enters viewport
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section
       id="contact"
       ref={ref}
-      className="py-16 sm:py-20 md:py-24 bg-white dark:bg-[#0a0a0a] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-white/90 dark:bg-[#0a0a0a]/90 relative overflow-hidden"
     >
       {/* Ambient Glows */}
       <div className="absolute top-0 left-1/4 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-[80px] sm:blur-[100px] md:blur-[120px] pointer-events-none" />
@@ -90,15 +114,70 @@ export default function ContactNew() {
             transition={{ delay: 0.5 }}
             className="text-center"
           >
-            <motion.a
-              href="mailto:your.email@example.com"
-              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all shadow-[0_0_20px_rgba(0,0,0,0.3)] hover:shadow-[0_0_35px_rgba(59,130,246,0.5)] dark:shadow-[0_0_20px_rgba(255,255,255,0.2)] dark:hover:shadow-[0_0_35px_rgba(255,255,255,0.4)]"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+            {/* Social Icons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.6 }}
+              className="flex items-center justify-center gap-6 mt-8"
             >
-              <Send className="w-5 h-5" />
-              Send me a message
-            </motion.a>
+              <a
+                href="https://github.com/gerardbernss"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <SiGithub
+                  className="w-7 h-7 text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-all duration-300 group-hover:scale-110"
+                  style={{ filter: "drop-shadow(0 0 0px transparent)" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.filter = "drop-shadow(0 0 8px #333)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.filter =
+                      "drop-shadow(0 0 0px transparent)";
+                  }}
+                />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/gerardsbernal/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <SiLinkedin
+                  className="w-7 h-7 text-gray-600 dark:text-gray-400 group-hover:text-[#0A66C2] transition-all duration-300 group-hover:scale-110"
+                  style={{ filter: "drop-shadow(0 0 0px transparent)" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.filter =
+                      "drop-shadow(0 0 8px #0A66C2)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.filter =
+                      "drop-shadow(0 0 0px transparent)";
+                  }}
+                />
+              </a>
+              <a
+                href="https://m.me/gerardbernss"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <SiMessenger
+                  className="w-7 h-7 text-gray-600 dark:text-gray-400 group-hover:text-[#0099FF] transition-all duration-300 group-hover:scale-110"
+                  style={{ filter: "drop-shadow(0 0 0px transparent)" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.filter =
+                      "drop-shadow(0 0 8px #0099FF)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.filter =
+                      "drop-shadow(0 0 0px transparent)";
+                  }}
+                />
+              </a>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>

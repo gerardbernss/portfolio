@@ -1,3 +1,25 @@
+/**
+ * AboutNew Component
+ *
+ * The About Me section featuring a photo slideshow and personal bio.
+ * Includes a two-column layout on desktop with interactive elements.
+ *
+ * Key Features:
+ * - Auto-advancing photo slideshow with manual navigation
+ * - Animated slide transitions using Framer Motion
+ * - Tech stack display with hover effects and brand icons
+ * - Scroll-triggered animations using useInView
+ * - Ambient glow background effect
+ *
+ * Responsive Behavior:
+ * - Mobile: Stacked layout, square aspect ratio photos
+ * - Desktop (lg+): Two-column layout, 4:5 aspect ratio photos
+ *
+ * Photo Slideshow:
+ * - Auto-advances every 4 seconds
+ * - Supports manual navigation via arrows or dots
+ * - Spring-based slide animations with direction awareness
+ */
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -19,7 +41,25 @@ import {
   SiGit,
   SiFigma,
 } from "react-icons/si";
+import { useTheme } from "@/contexts/ThemeContext";
 
+// Tech stack data (defined outside component to avoid recreation)
+const baseTechStack = [
+  { name: "React", icon: SiReact, color: "#61DAFB" },
+  { name: "Tailwind", icon: SiTailwindcss, color: "#06B6D4" },
+  { name: "Next.js", icon: SiNextdotjs, color: "#000000" }, // Default color, will be updated client-side
+  { name: "Javascript", icon: SiJavascript, color: "#F7DF1E" },
+  { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
+  { name: "Python", icon: SiPython, color: "#3776AB" },
+  { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
+  { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+  { name: "Oracle SQL", icon: SiOracle, color: "#F80000" },
+  { name: "Docker", icon: SiDocker, color: "#2496ED" },
+  { name: "Git", icon: SiGit, color: "#F05032" },
+  { name: "Figma", icon: SiFigma, color: "#F24E1E" },
+];
+
+// Photo slideshow images
 const photos = [
   { src: "/pic1.jpg", alt: "Photo 1" },
   { src: "/pic2.jpg", alt: "Photo 2" },
@@ -27,12 +67,37 @@ const photos = [
 ];
 
 export default function AboutNew() {
+  // Ref for scroll-triggered animations
   const ref = useRef(null);
+
+  // Theme context for dark/light mode detection
+  const { theme } = useTheme();
+
+  // Prevent hydration mismatch by waiting for client-side mount
+  const [mounted, setMounted] = useState(false);
+
+  // Check if section is in viewport (triggers once, with -100px margin)
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  // Current photo index in slideshow
   const [currentPhoto, setCurrentPhoto] = useState(0);
+
+  // Slide direction for animation (1 = forward, -1 = backward)
   const [direction, setDirection] = useState(0);
 
-  // Auto-advance slideshow
+  // Set mounted after initial render
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Tech stack with theme-aware Next.js color (only after mount to avoid hydration mismatch)
+  const techStack = baseTechStack.map((tech) =>
+    tech.name === "Next.js"
+      ? { ...tech, color: mounted && theme === "dark" ? "#FFFFFF" : "#000000" }
+      : tech
+  );
+
+  // Auto-advance slideshow every 4 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setDirection(1);
@@ -41,16 +106,24 @@ export default function AboutNew() {
     return () => clearInterval(timer);
   }, []);
 
+  // Navigate to next photo (wraps around)
   const nextPhoto = () => {
     setDirection(1);
     setCurrentPhoto((prev) => (prev + 1) % photos.length);
   };
 
+  // Navigate to previous photo (wraps around)
   const prevPhoto = () => {
     setDirection(-1);
     setCurrentPhoto((prev) => (prev - 1 + photos.length) % photos.length);
   };
 
+  /**
+   * Framer Motion variants for slide animations
+   * - enter: Starting position (off-screen left or right based on direction)
+   * - center: Active position (centered, fully visible)
+   * - exit: Ending position (slides out opposite to enter direction)
+   */
   const slideVariants = {
     enter: (direction: number) => ({
       x: direction > 0 ? 300 : -300,
@@ -72,7 +145,7 @@ export default function AboutNew() {
     <section
       id="about"
       ref={ref}
-      className="py-16 sm:py-20 md:py-24 bg-white dark:bg-[#0a0a0a] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-white/90 dark:bg-[#0a0a0a]/90 relative overflow-hidden"
     >
       {/* Ambient Glow */}
       <div className="absolute top-1/2 left-0 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-[80px] sm:blur-[100px] pointer-events-none -translate-y-1/2" />
@@ -183,71 +256,75 @@ export default function AboutNew() {
                   continuous learning and staying up-to-date with the latest
                   technologies and best practices.
                 </p>
-                <p>
-                  When I'm not coding, you can find me exploring new trends and
-                  technologies that push the boundaries of what's possible on
-                  the web.
-                </p>
               </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.5 }}
-                className="mt-8 p-4 sm:p-6 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-800 shadow-[0_0_20px_rgba(0,0,0,0.05)] dark:shadow-[0_0_30px_rgba(59,130,246,0.1)]"
-              >
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4">
-                  Tech Stack
-                </h4>
-                <div className="flex flex-wrap gap-2 sm:gap-3">
-                  {[
-                    { name: "React", icon: SiReact, color: "#61DAFB" },
-                    { name: "Tailwind", icon: SiTailwindcss, color: "#06B6D4" },
-                    {
-                      name: "Next.js",
-                      icon: SiNextdotjs,
-                      color: "#000000",
-                      darkColor: "#FFFFFF",
-                    },
-                    {
-                      name: "Javascript",
-                      icon: SiJavascript,
-                      color: "#F7DF1E",
-                    },
-                    { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
-                    { name: "Python", icon: SiPython, color: "#3776AB" },
-                    {
-                      name: "PostgreSQL",
-                      icon: SiPostgresql,
-                      color: "#4169E1",
-                    },
-                    { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
-                    { name: "Oracle SQL", icon: SiOracle, color: "#F80000" },
-                    { name: "Docker", icon: SiDocker, color: "#2496ED" },
-                    { name: "Git", icon: SiGit, color: "#F05032" },
-                    { name: "Figma", icon: SiFigma, color: "#F24E1E" },
-                  ].map((tech) => (
-                    <motion.div
-                      key={tech.name}
-                      className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] dark:hover:shadow-[0_0_18px_rgba(96,165,250,0.4)] transition-all cursor-default group"
-                      whileHover={{ scale: 1.05, y: -2 }}
-                    >
-                      <tech.icon
-                        className="w-4 h-4 sm:w-5 sm:h-5 transition-all group-hover:drop-shadow-[0_0_8px_var(--icon-glow)]"
-                        style={{
-                          color: tech.darkColor ? undefined : tech.color,
-                          ["--icon-glow" as string]: tech.color,
-                        }}
-                      />
-                      <span className="text-xs sm:text-sm font-medium">
-                        {tech.name}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
             </motion.div>
           </div>
+
+          {/* Tech Stack Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.5 }}
+            className="mt-8 sm:mt-12"
+          >
+            <h4 className="font-semibold text-gray-900 dark:text-white mb-4 sm:mb-6">
+              Tech Stack
+            </h4>
+            <div className="overflow-hidden">
+              <div className="flex w-max animate-slide-left-slow py-10">
+                {/* First set of icons */}
+                {techStack.map((tech) => (
+                  <div
+                    key={`first-${tech.name}`}
+                    className="group relative flex items-center justify-center mx-6 sm:mx-8 shrink-0"
+                  >
+                    <tech.icon
+                      className="w-8 h-8 sm:w-10 sm:h-10 opacity-70 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110"
+                      style={{
+                        color: tech.color,
+                        filter: "drop-shadow(0 0 0px transparent)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.filter = `drop-shadow(0 0 8px ${tech.color})`;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.filter =
+                          "drop-shadow(0 0 0px transparent)";
+                      }}
+                    />
+                    <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-20">
+                      {tech.name}
+                    </span>
+                  </div>
+                ))}
+                {/* Duplicate set for seamless loop */}
+                {techStack.map((tech) => (
+                  <div
+                    key={`second-${tech.name}`}
+                    className="group relative flex items-center justify-center mx-6 sm:mx-8 shrink-0"
+                  >
+                    <tech.icon
+                      className="w-8 h-8 sm:w-10 sm:h-10 opacity-70 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110"
+                      style={{
+                        color: tech.color,
+                        filter: "drop-shadow(0 0 0px transparent)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.filter = `drop-shadow(0 0 8px ${tech.color})`;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.filter =
+                          "drop-shadow(0 0 0px transparent)";
+                      }}
+                    />
+                    <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-20">
+                      {tech.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

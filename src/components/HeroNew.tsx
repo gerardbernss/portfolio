@@ -1,3 +1,26 @@
+/**
+ * HeroNew Component
+ *
+ * The main hero section of the portfolio landing page.
+ * Features a split layout with different arrangements for mobile and desktop.
+ *
+ * Key Features:
+ * - Typewriter animation effect for the role title
+ * - Blinking cursor effect synchronized with typing
+ * - Theme-aware hero images (light/dark variants)
+ * - Availability status badge with pulsing animation
+ * - Social media links with hover glow effects
+ * - Resume download and contact CTA buttons
+ * - Ambient glow background effects
+ *
+ * Responsive Behavior:
+ * - Mobile (<lg): Stacked vertical layout, centered content
+ * - Desktop (lg+): Absolute positioning with name left, text right, image center-bottom
+ *
+ * Layout Structure:
+ * - Mobile: Status badge → Name → Social icons → View My Work → Typing text → Buttons → Hero image
+ * - Desktop: Left side (name, socials, view work) | Center (hero image) | Right side (typing, description, buttons)
+ */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -7,16 +30,27 @@ import Image from "next/image";
 import { useTheme } from "@/contexts/ThemeContext";
 
 export default function HeroNew() {
+  // State for typewriter effect - stores currently displayed text
   const [displayedText, setDisplayedText] = useState("");
+
+  // Controls blinking cursor visibility
   const [showCursor, setShowCursor] = useState(true);
+
+  // Prevents hydration mismatch for theme-dependent images
   const [mounted, setMounted] = useState(false);
+
+  // Theme context for switching hero images
   const { theme } = useTheme();
+
+  // The text to display with typewriter effect
   const fullText = "Full-stack Web Developer";
 
+  // Mark component as mounted after initial render
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Typewriter effect: progressively reveal text character by character
   useEffect(() => {
     let index = 0;
     const typingInterval = setInterval(() => {
@@ -26,11 +60,12 @@ export default function HeroNew() {
       } else {
         clearInterval(typingInterval);
       }
-    }, 100);
+    }, 100); // 100ms per character
 
     return () => clearInterval(typingInterval);
   }, []);
 
+  // Blinking cursor effect: toggles visibility every 530ms
   useEffect(() => {
     const cursorInterval = setInterval(() => {
       setShowCursor((prev) => !prev);
@@ -42,9 +77,14 @@ export default function HeroNew() {
   return (
     <section
       id="home"
-      className="min-h-screen flex flex-col bg-[#F8F9FA] dark:bg-[#121114] pt-20 relative overflow-hidden"
+      className="min-h-screen flex flex-col bg-[#F8F9FA]/90 dark:bg-[#121114]/90 pt-20 relative overflow-hidden"
     >
-      {/* Ambient Glow Effects */}
+      {/*
+        Ambient Glow Effects
+        - Two blurred gradient circles create a soft background glow
+        - Blue glow positioned top-left, purple glow bottom-right
+        - Opacity differs between light and dark themes
+      */}
       <div className="absolute top-1/4 left-1/4 w-64 sm:w-80 md:w-96 lg:w-125 h-64 sm:h-80 md:h-96 lg:h-125 bg-blue-500/20 dark:bg-blue-500/10 rounded-full blur-[80px] sm:blur-[100px] lg:blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-48 sm:w-64 md:w-80 lg:w-100 h-48 sm:h-64 md:h-80 lg:h-100 bg-purple-500/15 dark:bg-purple-500/10 rounded-full blur-[60px] sm:blur-[80px] lg:blur-[100px] pointer-events-none" />
 
@@ -76,60 +116,16 @@ export default function HeroNew() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white"
+            className="text-4xl sm:text-5xl text-gray-900 dark:text-white"
           >
             <span className="text-blue-700 dark:text-blue-400 drop-shadow-[0_0_25px_rgba(59,130,246,0.5)] dark:drop-shadow-[0_0_35px_rgba(96,165,250,0.6)]">
               Gerard
             </span>
             <br />
-            Bernal
+            Berns
           </motion.h1>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="flex items-center justify-center gap-4 pt-4"
-          >
-            <motion.a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-all hover:drop-shadow-[0_0_12px_rgba(168,85,247,0.7)] dark:hover:drop-shadow-[0_0_15px_rgba(168,85,247,0.8)]"
-              whileHover={{ scale: 1.1, y: -2 }}
-            >
-              <Image
-                src="/github-icon.svg"
-                alt="GitHub"
-                width={24}
-                height={24}
-                className="dark:invert"
-              />
-            </motion.a>
-            <motion.a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-all hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.7)] dark:hover:drop-shadow-[0_0_15px_rgba(59,130,246,0.8)]"
-              whileHover={{ scale: 1.1, y: -2 }}
-            >
-              <Image
-                src="/linkedin-icon.svg"
-                alt="LinkedIn"
-                width={24}
-                height={24}
-              />
-            </motion.a>
-            <motion.a
-              href="mailto:your.email@example.com"
-              className="transition-all hover:drop-shadow-[0_0_12px_rgba(234,67,53,0.7)] dark:hover:drop-shadow-[0_0_15px_rgba(234,67,53,0.8)]"
-              whileHover={{ scale: 1.1, y: -2 }}
-            >
-              <Image src="/gmail-con.png" alt="Gmail" width={24} height={24} />
-            </motion.a>
-          </motion.div>
-
-          {/* View My Work Button - Below Icons */}
+          {/* View My Work Button */}
           <motion.a
             href="#projects"
             initial={{ opacity: 0, y: 10 }}
@@ -232,8 +228,13 @@ export default function HeroNew() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.6 }}
-          className="relative w-full h-[50vh] sm:h-[55vh] mt-auto"
+          className="relative w-full h-[50vh] sm:h-[55vh] mt-auto group"
+          title="Replaced once I have a decent picture of myself. :>>"
         >
+          {/* Custom Tooltip */}
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 px-3 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs sm:text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 whitespace-nowrap shadow-lg">
+            Replaced once I have a decent picture of myself. :&gt;&gt;
+          </div>
           <Image
             src="/hero-light.png"
             alt="Gerard Bernal"
@@ -261,7 +262,7 @@ export default function HeroNew() {
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
-        className="hidden lg:block absolute left-[8%] xl:left-[15%] 2xl:left-[20%] top-1/3 z-10"
+        className="hidden lg:block absolute left-[8%] xl:left-[15%] 2xl:left-[20%] top-[40%] z-10"
       >
         <motion.div
           initial={{ opacity: 0 }}
@@ -289,51 +290,7 @@ export default function HeroNew() {
           <br />
           Bernal
         </motion.h1>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="flex items-center justify-start gap-4 pt-6"
-        >
-          <motion.a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-all hover:drop-shadow-[0_0_12px_rgba(168,85,247,0.7)] dark:hover:drop-shadow-[0_0_15px_rgba(168,85,247,0.8)]"
-            whileHover={{ scale: 1.1, y: -2 }}
-          >
-            <Image
-              src="/github-icon.svg"
-              alt="GitHub"
-              width={28}
-              height={28}
-              className="dark:invert"
-            />
-          </motion.a>
-          <motion.a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-all hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.7)] dark:hover:drop-shadow-[0_0_15px_rgba(59,130,246,0.8)]"
-            whileHover={{ scale: 1.1, y: -2 }}
-          >
-            <Image
-              src="/linkedin-icon.svg"
-              alt="LinkedIn"
-              width={28}
-              height={28}
-            />
-          </motion.a>
-          <motion.a
-            href="mailto:your.email@example.com"
-            className="transition-all hover:drop-shadow-[0_0_12px_rgba(234,67,53,0.7)] dark:hover:drop-shadow-[0_0_15px_rgba(234,67,53,0.8)]"
-            whileHover={{ scale: 1.1, y: -2 }}
-          >
-            <Image src="/gmail-con.png" alt="Gmail" width={28} height={28} />
-          </motion.a>
-        </motion.div>
-
-        {/* View My Work Button - Below Icons */}
+        {/* View My Work Button */}
         <motion.a
           href="#projects"
           initial={{ opacity: 0, y: 10 }}
@@ -352,7 +309,7 @@ export default function HeroNew() {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="hidden lg:flex absolute right-[8%] xl:right-[12%] 2xl:right-[15%] top-1/3 z-10 flex-col items-end text-right space-y-4 max-w-sm xl:max-w-md"
+        className="hidden lg:flex absolute right-[8%] xl:right-[12%] 2xl:right-[15%] top-[40%] z-10 flex-col items-end text-right space-y-4 max-w-sm xl:max-w-md"
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -438,7 +395,7 @@ export default function HeroNew() {
         className="hidden lg:block absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[900px] xl:w-[1000px] xl:h-[1000px] 2xl:w-[1100px] 2xl:h-[1100px]"
       >
         <Image
-          src="/hero-light.png"
+          src="/hero-lightv3.png"
           alt="Gerard Bernal"
           fill
           className={`object-contain object-bottom transition-opacity duration-300 ${
@@ -447,7 +404,7 @@ export default function HeroNew() {
           priority
         />
         <Image
-          src="/hero-dark.png"
+          src="/hero-darkv3.png"
           alt="Gerard Bernal"
           fill
           className={`object-contain object-bottom transition-opacity duration-300 ${

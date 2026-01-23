@@ -1,3 +1,21 @@
+/**
+ * ProjectsNew Component
+ *
+ * Showcases portfolio projects in a responsive card grid layout.
+ * Each project card displays title, description, tech stack, and links.
+ *
+ * Key Features:
+ * - Project cards with hover border and shadow effects
+ * - Technology tags displayed as pills
+ * - Links to GitHub repository and live demo
+ * - Staggered entrance animations on scroll
+ * - Dual ambient glow effects (blue top-left, purple bottom-right)
+ *
+ * Responsive Behavior:
+ * - Mobile: Single column
+ * - Tablet/Desktop (sm+): Two column grid
+ * - Adaptive padding and gaps across breakpoints
+ */
 "use client";
 
 import { motion } from "framer-motion";
@@ -6,9 +24,13 @@ import { useRef } from "react";
 import { ExternalLink, Github } from "lucide-react";
 
 export default function ProjectsNew() {
+  // Ref for scroll-triggered animations
   const ref = useRef(null);
+
+  // Trigger animation when section enters viewport
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Project data array - each project has title, description, tags, and links
   const projects = [
     {
       title: "Saint Louis University BedS Quick Campus System",
@@ -22,7 +44,7 @@ export default function ProjectsNew() {
       title: "Preventive Maintenance Information System",
       description:
         "A web application designed to streamline and manage preventive maintenance tasks for Saint Louis University's computer equipment and facilities.",
-      tags: ["React", "Node.js", "Socket.io", "MongoDB"],
+      tags: ["HTML", "CSS", "Bootstrap", "PHP", "MySQL", "MAMP", "Figma"],
       github: "https://github.com",
       demo: "https://demo.com",
     },
@@ -30,7 +52,7 @@ export default function ProjectsNew() {
       title: "Cruz Dental Clinic Appointment and Records System",
       description:
         "A web-based system for managing patient appointments and patient dental records for Cruz Dental Clinic.",
-      tags: ["Vue.js", "Python", "Chart.js", "Redis"],
+      tags: ["HTML", "CSS", "Bootstrap", "PHP", "MySQL", "MAMP", "Figma"],
       github: "https://github.com",
       demo: "https://demo.com",
     },
@@ -40,7 +62,7 @@ export default function ProjectsNew() {
     <section
       id="projects"
       ref={ref}
-      className="py-16 sm:py-20 md:py-24 bg-white dark:bg-[#0a0a0a] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-[#F8F9FA]/90 dark:bg-[#121114]/90 relative overflow-hidden"
     >
       {/* Ambient Glows */}
       <div className="absolute top-1/4 left-0 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-[80px] sm:blur-[100px] md:blur-[120px] pointer-events-none" />

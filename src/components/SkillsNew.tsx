@@ -1,3 +1,20 @@
+/**
+ * SkillsNew Component
+ *
+ * Displays technical skills organized by category in a responsive grid.
+ * Features scroll-triggered animations and hover effects.
+ *
+ * Key Features:
+ * - Skills organized into 4 categories: Frontend, Backend, Database, Tools
+ * - Staggered entrance animations for each category card
+ * - Hover glow effects on skill tags
+ * - Ambient blue glow background effect
+ *
+ * Responsive Behavior:
+ * - Mobile (<480px): Single column layout
+ * - Tablet (480px+): Two column grid
+ * - Consistent padding/gap adjustments across breakpoints
+ */
 "use client";
 
 import { motion } from "framer-motion";
@@ -5,9 +22,13 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 export default function SkillsNew() {
+  // Ref for scroll-triggered animations
   const ref = useRef(null);
+
+  // Trigger animation when section enters viewport (with -100px margin)
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Skill categories with associated technologies
   const skillCategories = [
     {
       title: "Frontend",
@@ -31,7 +52,7 @@ export default function SkillsNew() {
     <section
       id="skills"
       ref={ref}
-      className="py-16 sm:py-20 md:py-24 bg-[#F8F9FA] dark:bg-[#121114] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-white/90 dark:bg-[#0a0a0a]/90 relative overflow-hidden"
     >
       {/* Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 sm:w-96 md:w-150 h-80 sm:h-96 md:h-150 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-[80px] sm:blur-[100px] md:blur-[150px] pointer-events-none" />

@@ -77,7 +77,7 @@ export default function ProjectsNew() {
             Projects
           </h2>
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8 sm:mb-12">
-            Things I've built
+            Where did I implement my skills?
           </h3>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6">

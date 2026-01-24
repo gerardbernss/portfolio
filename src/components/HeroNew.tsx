@@ -365,7 +365,7 @@ export default function HeroNew() {
           className="flex flex-wrap items-center justify-end gap-3 pt-2"
         >
           <motion.a
-            href="/resume.pdf"
+            href="/resume-gsbernal.pdf"
             download
             className="group flex items-center justify-center gap-2 w-44 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg text-base font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all shadow-[0_0_20px_rgba(0,0,0,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] dark:shadow-[0_0_20px_rgba(255,255,255,0.2)] dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
             whileHover={{ scale: 1.02 }}

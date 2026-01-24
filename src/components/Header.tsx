@@ -97,13 +97,13 @@ export default function Header() {
         - Spring animation for entrance effect
       */}
       <motion.header
-        className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 sm:gap-3"
+        className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 md:gap-4"
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
       >
         <nav
-          className={`flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 rounded-full border transition-all duration-300 ${
+          className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border transition-all duration-300 ${
             scrolled
               ? "bg-white/90 dark:bg-[#1a1a1a]/90 border-gray-200 dark:border-gray-700 shadow-lg shadow-black/5 dark:shadow-black/20 backdrop-blur-md"
               : "bg-white/80 dark:bg-[#1a1a1a]/80 border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm"
@@ -155,12 +155,29 @@ export default function Header() {
               <Menu className="w-4 h-4 text-gray-700 dark:text-gray-300" />
             )}
           </motion.button>
+
+          {/* Theme Toggle - Inside pill on mobile only */}
+          <motion.button
+            onClick={toggleTheme}
+            className="shrink-0 md:hidden p-1.5 sm:p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            aria-label="Toggle theme"
+          >
+            {!mounted ? (
+              <div className="w-4 h-4" />
+            ) : theme === "light" ? (
+              <Moon className="w-4 h-4 text-gray-700" />
+            ) : (
+              <Sun className="w-4 h-4 text-yellow-400" />
+            )}
+          </motion.button>
         </nav>
 
-        {/* Theme Toggle - Outside the pill */}
+        {/* Theme Toggle - Outside pill on desktop */}
         <motion.button
           onClick={toggleTheme}
-          className={`shrink-0 p-2 sm:p-2.5 rounded-full border transition-all duration-300 ${
+          className={`hidden md:flex shrink-0 p-2 sm:p-2.5 rounded-full border transition-all duration-300 ${
             scrolled
               ? "bg-white/90 dark:bg-[#1a1a1a]/90 border-gray-200 dark:border-gray-700 shadow-lg shadow-black/5 dark:shadow-black/20 backdrop-blur-md"
               : "bg-white/80 dark:bg-[#1a1a1a]/80 border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm"

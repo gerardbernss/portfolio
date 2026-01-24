@@ -65,7 +65,7 @@ export default function Experience() {
     <section
       id="experience"
       ref={ref}
-      className="py-16 sm:py-20 md:py-24 bg-[#F8F9FA]/90 dark:bg-[#121114]/90 relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 relative overflow-hidden"
     >
       {/* Ambient Glow */}
       <div className="absolute top-1/3 right-0 w-48 sm:w-64 md:w-80 h-48 sm:h-64 md:h-80 bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-[60px] sm:blur-[80px] md:blur-[100px] pointer-events-none" />

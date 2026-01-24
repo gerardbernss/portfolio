@@ -21,7 +21,7 @@ export default function PortfolioContent() {
         <ProjectsNew />
         <ContactNew />
       </main>
-      <footer className="py-8 sm:py-10 md:py-12 bg-[#F8F9FA]/90 dark:bg-[#121114]/90 border-t border-gray-200 dark:border-gray-800 relative z-[2]">
+      <footer className="py-8 sm:py-10 md:py-12 border-t border-gray-200 dark:border-gray-800 relative z-[2]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col items-center gap-3 sm:gap-4">
             <a href="#home" className="transition-transform hover:scale-105">

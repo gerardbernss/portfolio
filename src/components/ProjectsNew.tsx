@@ -33,6 +33,15 @@ export default function ProjectsNew() {
   // Project data array - each project has title, description, tags, and links
   const projects = [
     {
+      title: "AI-Driven Gamified Learning Web System",
+      description:
+        "AI-powered gamified learning web application for medical students. An MIT capstone project.",
+      tags: ["React", "Tailwind", "Next.js", "Laravel", "mySQL"],
+      github: "https://github.com",
+      demo: "https://demo.com",
+      status: "In Progress",
+    },
+    {
       title: "Saint Louis University BedS Quick Campus System",
       description:
         "A web application for SLU BedS students at staff to manage student records, course enrollment, and academic performance tracking.",
@@ -62,7 +71,7 @@ export default function ProjectsNew() {
     <section
       id="projects"
       ref={ref}
-      className="py-16 sm:py-20 md:py-24 bg-[#F8F9FA]/90 dark:bg-[#121114]/90 relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 relative overflow-hidden"
     >
       {/* Ambient Glows */}
       <div className="absolute top-1/4 left-0 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-[80px] sm:blur-[100px] md:blur-[120px] pointer-events-none" />
@@ -89,6 +98,14 @@ export default function ProjectsNew() {
                 transition={{ delay: index * 0.1 }}
                 className="group relative p-4 sm:p-5 md:p-6 bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-600 dark:hover:border-blue-400 transition-all hover:shadow-[0_0_30px_rgba(59,130,246,0.2)] dark:hover:shadow-[0_0_35px_rgba(96,165,250,0.25)]"
               >
+                {project.status && (
+                  <div className="flex justify-start mb-2">
+                    <span className="px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full border border-blue-200 dark:border-blue-800 whitespace-nowrap shadow-[0_0_15px_rgba(59,130,246,0.5)] dark:shadow-[0_0_20px_rgba(96,165,250,0.6)]">
+                      {project.status}
+                    </span>
+                  </div>
+                )}
+
                 <h4 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3">
                   {project.title}
                 </h4>

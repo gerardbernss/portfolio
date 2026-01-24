@@ -61,9 +61,11 @@ const baseTechStack = [
 
 // Photo slideshow images
 const photos = [
+  { src: "/pic4.jpg", alt: "Photo 1" },
   { src: "/pic1.jpg", alt: "Photo 1" },
   { src: "/pic2.jpg", alt: "Photo 2" },
   { src: "/pic3.jpg", alt: "Photo 3" },
+  { src: "/pic5.jpg", alt: "Photo 1" },
 ];
 
 export default function AboutNew() {
@@ -145,7 +147,7 @@ export default function AboutNew() {
     <section
       id="about"
       ref={ref}
-      className="py-16 sm:py-20 md:py-24 bg-white/90 dark:bg-[#0a0a0a]/90 relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 relative overflow-hidden"
     >
       {/* Ambient Glow */}
       <div className="absolute top-1/2 left-0 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-[80px] sm:blur-[100px] pointer-events-none -translate-y-1/2" />
@@ -160,7 +162,7 @@ export default function AboutNew() {
           </h2>
 
           {/* Two Column Layout */}
-          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-start">
             {/* Left Side - Photo Slideshow */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}

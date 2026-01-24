@@ -77,7 +77,7 @@ export default function HeroNew() {
   return (
     <section
       id="home"
-      className="min-h-screen flex flex-col bg-[#F8F9FA]/90 dark:bg-[#121114]/90 pt-20 relative overflow-hidden"
+      className="min-h-screen flex flex-col pt-20 relative overflow-hidden"
     >
       {/*
         Ambient Glow Effects
@@ -228,7 +228,7 @@ export default function HeroNew() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.6 }}
-          className="relative w-full h-[50vh] sm:h-[55vh] mt-auto group"
+          className="relative w-full h-[50vh] sm:h-[55vh] mt-4 group"
           title="Replaced once I have a decent picture of myself. :>>"
         >
           {/* Custom Tooltip */}
@@ -236,7 +236,7 @@ export default function HeroNew() {
             Replaced once I have a decent picture of myself. :&gt;&gt;
           </div>
           <Image
-            src="/hero-light.png"
+            src="/hero-lightv3.png"
             alt="Gerard Bernal"
             fill
             className={`object-contain object-bottom transition-opacity duration-300 ${
@@ -245,7 +245,7 @@ export default function HeroNew() {
             priority
           />
           <Image
-            src="/hero-dark.png"
+            src="/hero-darkv3.png"
             alt="Gerard Bernal"
             fill
             className={`object-contain object-bottom transition-opacity duration-300 ${
@@ -262,7 +262,7 @@ export default function HeroNew() {
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
-        className="hidden lg:block absolute left-[8%] xl:left-[15%] 2xl:left-[20%] top-[40%] z-10"
+        className="hidden lg:block absolute left-[8%] xl:left-[15%] 2xl:left-[20%] top-[30%] z-10"
       >
         <motion.div
           initial={{ opacity: 0 }}
@@ -309,7 +309,7 @@ export default function HeroNew() {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="hidden lg:flex absolute right-[8%] xl:right-[12%] 2xl:right-[15%] top-[40%] z-10 flex-col items-end text-right space-y-4 max-w-sm xl:max-w-md"
+        className="hidden lg:flex absolute right-[8%] xl:right-[12%] 2xl:right-[15%] top-[30%] z-10 flex-col items-end text-right space-y-4 max-w-sm xl:max-w-md"
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}

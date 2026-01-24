@@ -52,7 +52,7 @@ export default function SkillsNew() {
     <section
       id="skills"
       ref={ref}
-      className="py-16 sm:py-20 md:py-24 bg-white/90 dark:bg-[#0a0a0a]/90 relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 relative overflow-hidden"
     >
       {/* Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 sm:w-96 md:w-150 h-80 sm:h-96 md:h-150 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-[80px] sm:blur-[100px] md:blur-[150px] pointer-events-none" />
